@@ -4,13 +4,13 @@ namespace ControldeInventariodeTiendaWindowsForms
 {
     public class MovimientoStock
     {
-        private DateTime fecha;
-        private string tipoMovimiento;
-        private int cantidad;
-        private string nombreProducto;
-        private int idProducto;
-        private string usuarioResponsable;
-        private string observaciones;
+        protected DateTime fecha;
+        protected string tipoMovimiento;
+        protected int cantidad;
+        protected string nombreProducto;
+        protected int idProducto;
+        protected string usuarioResponsable;
+        protected string observaciones;
         public DateTime Fecha
         {
             get { return fecha; }
