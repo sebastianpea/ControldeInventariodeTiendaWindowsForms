@@ -238,10 +238,23 @@ namespace ControldeInventariodeTiendaWindowsForms
             }
 
             var producto = SistemaBasedeDatos.Instancia.Productos[lstProductos.SelectedIndex];
+            var usuario = SistemaBasedeDatos.Instancia.UsuarioActual;
 
             if (rbAgregar.Checked)
             {
                 producto.StockActual += cantidad;
+
+                // Registrar movimiento de entrada
+                var movimiento = new MovimientoStock(
+                    "Entrada",
+                    cantidad,
+                    producto.Nombre,
+                    producto.Id,
+                    usuario.Nombre,
+                    "Entrada de stock"
+                );
+                SistemaBasedeDatos.Instancia.RegistrarMovimiento(movimiento);
+
                 MessageBox.Show($"Stock agregado. Nuevo stock: {producto.StockActual}", "Éxito",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -250,6 +263,18 @@ namespace ControldeInventariodeTiendaWindowsForms
                 if (producto.StockActual >= cantidad)
                 {
                     producto.StockActual -= cantidad;
+
+                    // Registrar movimiento de salida
+                    var movimiento = new MovimientoStock(
+                        "Salida",
+                        cantidad,
+                        producto.Nombre,
+                        producto.Id,
+                        usuario.Nombre,
+                        "Salida de stock"
+                    );
+                    SistemaBasedeDatos.Instancia.RegistrarMovimiento(movimiento);
+
                     MessageBox.Show($"Stock reducido. Nuevo stock: {producto.StockActual}", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -344,6 +369,15 @@ namespace ControldeInventariodeTiendaWindowsForms
             {
                 SistemaBasedeDatos.Instancia.UsuarioActual = null;
                 this.Close();
+            }
+        }
+
+        private void btnVerHistorial_Click(object sender, EventArgs e)
+        {
+            // Abrir formulario de historial
+            using (HistorialForm historialForm = new HistorialForm())
+            {
+                historialForm.ShowDialog();
             }
         }
     }

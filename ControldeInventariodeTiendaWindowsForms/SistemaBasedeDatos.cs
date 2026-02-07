@@ -11,9 +11,8 @@ namespace ControldeInventariodeTiendaWindowsForms
         protected List<Producto> productos;
         protected List<ProductoElectrónico> productosElectrónicos;
         protected List<ProductoPerecedero> productosPerecederos;
-
-        // Lista de empleados (usuarios)
         protected List<Empleado> empleados;
+        protected List<MovimientoStock> historialMovimientos;
 
         public List<Producto> Productos
         {
@@ -39,11 +38,14 @@ namespace ControldeInventariodeTiendaWindowsForms
             set { empleados = value; }
         }
 
-        // Usuario autenticado actualmente
+        public List<MovimientoStock> HistorialMovimientos
+        {
+            get { return historialMovimientos; }
+            set { historialMovimientos = value; }
+        }
+        //empleado actual
         public Empleado UsuarioActual { get; set; }
-
         public static SistemaBasedeDatos Instancia { get; } = new SistemaBasedeDatos();
-
         public SistemaBasedeDatos()
         {
             productos = new List<Producto>();
@@ -54,11 +56,10 @@ namespace ControldeInventariodeTiendaWindowsForms
 
             empleados = new List<Empleado>();
 
-            // Empleado de ejemplo
+            historialMovimientos = new List<MovimientoStock>();
             var admin = new EmpleadoAdministrador("endmin", "007", "endmin@gmail.com", "endmin123");
             empleados.Add(admin);
         }
-
         public Empleado ObtenerEmpleadoPorCorreoYContraseña(string correo, string contraseña)
         {
             // Si la contraseña está vacía, solo buscar por correo (usado para validar si existe)
@@ -77,6 +78,12 @@ namespace ControldeInventariodeTiendaWindowsForms
         {
             if (empleado != null)
                 empleados.Add(empleado);
+        }
+
+        public void RegistrarMovimiento(MovimientoStock movimiento)
+        {
+            if (movimiento != null)
+                historialMovimientos.Add(movimiento);
         }
 
         public override string ToString()

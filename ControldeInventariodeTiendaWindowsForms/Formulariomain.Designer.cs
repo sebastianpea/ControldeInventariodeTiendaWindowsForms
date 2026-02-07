@@ -48,6 +48,7 @@
             this.lblUsuarioActual = new System.Windows.Forms.Label();
             this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.btnGestionarUsuarios = new System.Windows.Forms.Button();
+            this.btnVerHistorial = new System.Windows.Forms.Button();
             this.groupBoxDatos.SuspendLayout();
             this.groupBoxStock.SuspendLayout();
             this.SuspendLayout();
@@ -409,12 +410,27 @@
             this.btnGestionarUsuarios.UseVisualStyleBackColor = false;
             this.btnGestionarUsuarios.Click += new System.EventHandler(this.btnGestionarUsuarios_Click);
             // 
+            // btnVerHistorial
+            // 
+            this.btnVerHistorial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
+            this.btnVerHistorial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVerHistorial.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnVerHistorial.ForeColor = System.Drawing.Color.Black;
+            this.btnVerHistorial.Location = new System.Drawing.Point(680, 10);
+            this.btnVerHistorial.Name = "btnVerHistorial";
+            this.btnVerHistorial.Size = new System.Drawing.Size(170, 35);
+            this.btnVerHistorial.TabIndex = 10;
+            this.btnVerHistorial.Text = "Ver Historial";
+            this.btnVerHistorial.UseVisualStyleBackColor = false;
+            this.btnVerHistorial.Click += new System.EventHandler(this.btnVerHistorial_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ClientSize = new System.Drawing.Size(1210, 690);
+            this.Controls.Add(this.btnVerHistorial);
             this.Controls.Add(this.btnGestionarUsuarios);
             this.Controls.Add(this.btnCerrarSesion);
             this.Controls.Add(this.lblUsuarioActual);
@@ -472,5 +488,6 @@
         private System.Windows.Forms.Label lblUsuarioActual;
         private System.Windows.Forms.Button btnCerrarSesion;
         private System.Windows.Forms.Button btnGestionarUsuarios;
+        private System.Windows.Forms.Button btnVerHistorial;
     }
 }
