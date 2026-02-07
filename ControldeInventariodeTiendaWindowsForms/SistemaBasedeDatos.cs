@@ -12,6 +12,9 @@ namespace ControldeInventariodeTiendaWindowsForms
         protected List<ProductoElectrónico> productosElectrónicos;
         protected List<ProductoPerecedero> productosPerecederos;
 
+        // Lista de empleados (usuarios)
+        protected List<Empleado> empleados;
+
         public List<Producto> Productos
         {
             get { return productos; }
@@ -30,6 +33,17 @@ namespace ControldeInventariodeTiendaWindowsForms
             set { productosPerecederos = value; }
         }
 
+        public List<Empleado> Empleados
+        {
+            get { return empleados; }
+            set { empleados = value; }
+        }
+
+        // Usuario autenticado actualmente
+        public Empleado UsuarioActual { get; set; }
+
+        public static SistemaBasedeDatos Instancia { get; } = new SistemaBasedeDatos();
+
         public SistemaBasedeDatos()
         {
             productos = new List<Producto>();
@@ -37,6 +51,32 @@ namespace ControldeInventariodeTiendaWindowsForms
             productosElectrónicos = new List<ProductoElectrónico>();
 
             productosPerecederos = new List<ProductoPerecedero>();
+
+            empleados = new List<Empleado>();
+
+            // Empleado de ejemplo
+            var admin = new EmpleadoAdministrador("endmin", "007", "endmin@gmail.com", "endmin123");
+            empleados.Add(admin);
+        }
+
+        public Empleado ObtenerEmpleadoPorCorreoYContraseña(string correo, string contraseña)
+        {
+            // Si la contraseña está vacía, solo buscar por correo (usado para validar si existe)
+            if (string.IsNullOrEmpty(contraseña))
+            {
+                return empleados.FirstOrDefault(e => e != null && e.CorreoElectronico == correo);
+            }
+
+            // Búsqueda completa por correo y contraseña
+            return empleados.FirstOrDefault(e => e != null &&
+                e.CorreoElectronico == correo &&
+                e.Contrasena == contraseña);
+        }
+
+        public void AgregarEmpleado(Empleado empleado)
+        {
+            if (empleado != null)
+                empleados.Add(empleado);
         }
 
         public override string ToString()
@@ -62,4 +102,3 @@ namespace ControldeInventariodeTiendaWindowsForms
 
     }
 }
-

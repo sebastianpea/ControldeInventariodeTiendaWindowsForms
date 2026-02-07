@@ -48,6 +48,13 @@ namespace ControldeInventariodeTiendaWindowsForms
             stockActual = "";
             stockMinimo = "";
         }
+
+        // Propiedades públicas para permitir autenticación desde otras clases
+        public string CorreoElectronico => correoElectronico;
+        public string Contrasena => contraseña;
+        public string Nombre => nombre;
+        public string IdEmpleado => idEmpleado;
+
         public override string ToString()
         {
             return $"Nombre: {nombre}, ID Empleado: {idEmpleado}, Correo Electrónico: {correoElectronico}";

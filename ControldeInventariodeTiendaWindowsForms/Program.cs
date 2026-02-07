@@ -1,17 +1,30 @@
+using System;
+using System.Windows.Forms;
+
 namespace ControldeInventariodeTiendaWindowsForms
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+
+            // Mostrar el formulario de login primero
+            using (Form1 loginForm = new Form1())
+            {
+                if (loginForm.ShowDialog() == DialogResult.OK)
+                {
+                    // Si el login fue exitoso, mostrar el formulario principal
+                    Application.Run(new MainForm());
+                }
+                else
+                {
+                    // Si el login fue cancelado, cerrar la aplicación
+                    MessageBox.Show("Aplicación cerrada.", "Información",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }
